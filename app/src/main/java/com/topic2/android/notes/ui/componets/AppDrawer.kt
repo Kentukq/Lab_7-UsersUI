@@ -86,4 +86,34 @@ private fun ScreenNavigationButton(
     } else {
         colors.surface
     }
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp, end = 8.dp, top = 8.dp),
+        color = backgroundColor,
+        shape = MaterialTheme.shapes.small
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .clickable(onClick = onClick)
+                .fillMaxWidth()
+                .padding(4.dp)
+        ) {
+            Image(
+                imageVector = icon,
+                contentDescription = "Screen Navigation Button",
+                colorFilter = ColorFilter.tint(textColor),
+                alpha = imageAlpha
+            )
+            Spacer(Modifier.width(16.dp))
+            Text(
+                text = label,
+                style = MaterialTheme.typography.body2,
+                color = textColor,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
 }
