@@ -38,3 +38,52 @@ private fun AppDrawerHeader() {
         )
     }
 }
+
+@Preview
+@Composable
+fun AppDrawerHeaderPreview() {
+    NotesTheme {
+        AppDrawerHeader()
+    }
+}
+
+@Preview
+@Composable
+fun ScreenNavigationButtonPreview() {
+    NotesTheme {
+        ScreenNavigationButton(
+            icon = Icons.Filled.Home,
+            label = "Заметки",
+            isSelected = true,
+            onClick = { }
+        )
+    }
+}
+
+@Composable
+private fun ScreenNavigationButton(
+    icon: ImageVector,
+    label: String,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    val colors = MaterialTheme.colors
+
+    val imageAlpha = if (isSelected) {
+        1f
+    } else {
+        0.6f
+    }
+
+    val textColor = if (isSelected) {
+        colors.primary
+    } else {
+        colors.onSurface.copy(alpha = 0.6f)
+    }
+
+    val backgroundColor = if (isSelected) {
+        colors.primary.copy(alpha = 0.12f)
+    } else {
+        colors.surface
+    }
+}
