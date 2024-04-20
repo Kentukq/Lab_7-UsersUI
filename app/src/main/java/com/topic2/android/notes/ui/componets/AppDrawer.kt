@@ -46,6 +46,7 @@ fun AppDrawerHeaderPreview() {
         AppDrawerHeader()
     }
 }
+
 @Preview
 @Composable
 fun ScreenNavigationButtonPreview() {
@@ -82,7 +83,7 @@ private fun ScreenNavigationButton(
 
     val backgroundColor = if (isSelected) {
         colors.primary.copy(alpha = 0.12f)
-    } else {
+    } else  {
         colors.surface
     }
     Surface(
