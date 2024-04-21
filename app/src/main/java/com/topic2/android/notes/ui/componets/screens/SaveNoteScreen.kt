@@ -152,3 +152,18 @@ private fun SaveNoteTopAppBar(
                 )
             }
         },
+        actions = {
+            IconButton(onClick = onSaveNoteClick) {
+                Icon(
+                    imageVector = Icons.Default.Check,
+                    contentDescription = "Save Note",
+                    tint = MaterialTheme.colors.onPrimary
+                )
+            }
+            IconButton(onClick = onOpenColorPickerClick) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_color_lens_24),
+                    contentDescription = "Open Color Picker Button",
+                    tint = MaterialTheme.colors.onPrimary
+                )
+            }
