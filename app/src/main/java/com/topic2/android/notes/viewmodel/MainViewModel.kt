@@ -55,4 +55,27 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             repository.insertNote(note)
         }
     }
+    fun onNoteEntryChange(note: NoteModel) {
+        _noteEntry.value = note
+    }
+
+    fun saveNote(note: NoteModel) {
+        viewModelScope.launch(Dispatchers.Default) {
+            repository.insertNote(note)
+
+            withContext(Dispatchers.Main) {
+                NotesRouter.navigateTo(Screen.Notes)
+                _noteEntry.value = NoteModel()
+            }
+        }
+    }
+
+    fun moveNoteToTrash(note: NoteModel) {
+        viewModelScope.launch(Dispatchers.Default) {
+            repository.moveNoteToTrash(note.id)
+            withContext(Dispatchers.Main) {
+                NotesRouter.navigateTo(Screen.Notes)
+            }
+        }
+    }
 }
