@@ -23,7 +23,18 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         repository.getAllNotesNotInTrash()
     }
 
-    fun onCreateNewNoteClick() {}
+    val notesInTrash by lazy { repository.getAllNotesInTrash() }
+
+    private var _noteEntry = MutableLiveData(NoteModel())
+    val noteEntry: LiveData<NoteModel> = _noteEntry
+
+    val colors: LiveData<List<ColorModel>> by lazy {
+        repository.getAllColors()
+    }
+
+
+    private var _selectedNotes = MutableLiveData<List<NoteModel>>(listOf())
+    val selectedNotes: LiveData<List<NoteModel>> = _selectedNotes
 
     fun onCreateNewNoteClick() {
         _noteEntry.value = NoteModel()
