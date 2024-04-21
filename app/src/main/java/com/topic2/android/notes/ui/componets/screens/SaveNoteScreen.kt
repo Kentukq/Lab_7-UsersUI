@@ -59,6 +59,7 @@ fun ColorPickerPreview() {
     ) { }
 }
 
+
 @Composable
 fun ColorItem(
     color: ColorModel,
@@ -88,6 +89,5 @@ fun ColorItem(
     }
 }
 
-@Preview
-@Composable
+@Preview @Composable
 fun ColorItemPreview() { ColorItem(ColorModel.DEFAULT) {} }
