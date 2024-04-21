@@ -47,3 +47,7 @@ fun ColorItem(
         )
     }
 }
+
+@Preview
+@Composable
+fun ColorItemPreview() { ColorItem(ColorModel.DEFAULT) {} }
