@@ -167,3 +167,17 @@ private fun SaveNoteTopAppBar(
                     tint = MaterialTheme.colors.onPrimary
                 )
             }
+            if (isEditingMode) {
+                IconButton(
+                    onClick = onDeleteNoteClick
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "Delete Note Button",
+                        tint = MaterialTheme.colors.onPrimary
+                    )
+                }
+            }
+        }
+    )
+}
