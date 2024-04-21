@@ -136,3 +136,10 @@ private fun SaveNoteTopAppBar(
     onOpenColorPickerClick: () -> Unit,
     onDeleteNoteClick: ()  -> Unit
 ) {
+    TopAppBar(
+        title = {
+            Text(
+                text = "Save Note",
+                color = MaterialTheme.colors.onPrimary
+            )
+        },
