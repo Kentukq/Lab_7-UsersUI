@@ -82,6 +82,19 @@ fun NotesScreen(viewModel: MainViewModel) {
                 )
             }
         },
+        floatingActionButtonPosition = FabPosition.End,
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { viewModel.onCreateNewNoteClick()},
+                contentColor = MaterialTheme.colors.background,
+                content = {
+                    Icon(
+                        imageVector = Icons.Filled.Add,
+                        contentDescription = "Add Note Button"
+                    )
+                }
+            )
+        }
     )
 }
 
