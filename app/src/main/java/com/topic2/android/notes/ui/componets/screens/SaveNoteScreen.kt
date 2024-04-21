@@ -143,3 +143,12 @@ private fun SaveNoteTopAppBar(
                 color = MaterialTheme.colors.onPrimary
             )
         },
+        navigationIcon = {
+            IconButton(onClick = onBackClick) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Save Note Button",
+                    tint = MaterialTheme.colors.onPrimary
+                )
+            }
+        },
