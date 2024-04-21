@@ -127,7 +127,106 @@ fun ColorItem(
 
 @Preview @Composable
 fun ColorItemPreview() { ColorItem(ColorModel.DEFAULT) {} }
+
+
+@Composable
+@ExperimentalMaterialApi
 fun SaveNoteScreen(viewModel: MainViewModel) {
+    val noteEntry: NoteModel by viewModel.noteEntry.observeAsState(NoteModel())
+
+    val colors: List<ColorModel> by viewModel.colors.observeAsState(listOf())
+
+    val bottomDrawerState: BottomDrawerState = rememberBottomDrawerState(BottomDrawerValue.Closed)
+    val coroutineScope = rememberCoroutineScope()
+
+    val moveNoteToTrashDialogShowState: MutableState<Boolean> = rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    BackHandler(
+        onBack = {
+            if (bottomDrawerState.isOpen) {
+                coroutineScope.launch { bottomDrawerState.close() }
+            } else {
+                NotesRouter.navigateTo(Screen.Notes)
+            }
+        }
+    )
+
+    Scaffold(topBar = {
+        val isEditingMode: Boolean = noteEntry.id != NEW_NOTE_ID
+        SaveNoteTopAppBar(
+            isEditingMode = isEditingMode,
+            onBackClick = {
+                NotesRouter.navigateTo(Screen.Notes)
+            },
+            onSaveNoteClick = {
+                viewModel.saveNote(noteEntry)
+            },
+            onOpenColorPickerClick = {
+                coroutineScope.launch { bottomDrawerState.open()}
+            },
+            onDeleteNoteClick = {
+                moveNoteToTrashDialogShowState.value = true
+            }
+        )
+    },
+        content = {it ->
+            BottomDrawer(
+                drawerState = bottomDrawerState,
+                drawerContent = {
+                    ColorPicker(colors = colors,
+                        onColorSelect = { color ->
+                            val newNoteEntry = noteEntry.copy(color = color)
+                            viewModel.onNoteEntryChange(newNoteEntry)
+                        }
+                    )
+                },
+                content = {
+                    SaveNoteContent(
+                        note = noteEntry,
+                        onNoteChange = { updateNoteEntry ->
+                            viewModel.onNoteEntryChange(updateNoteEntry)
+                        }
+                    )
+                }
+            )
+            if (moveNoteToTrashDialogShowState.value) {
+                AlertDialog(
+                    onDismissRequest = {
+                        moveNoteToTrashDialogShowState.value = false
+                    },
+                    title = {
+                        Text("Move note to the trash?")
+                    },
+                    text = {
+                        Text(
+                            "Are you sure you want to" +
+                                    "move this note to the trash?"
+                        )
+                    },
+                    confirmButton = {
+                        TextButton(
+                            onClick = {
+                                viewModel.moveNoteToTrash(noteEntry)
+                            }
+                        ) {
+                            Text("Confirm")
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = {
+                                moveNoteToTrashDialogShowState.value = false
+                            }) {
+                            Text("Dismiss")
+                        }
+                    }
+                )
+            }
+        }
+    )
+}
 
 @Composable
 private fun SaveNoteTopAppBar(
