@@ -38,16 +38,6 @@ fun NotesScreen(viewModel: MainViewModel) {
 
     Scaffold(topBar = {
         TopAppBar(
-            title =  "Заметки",
-            icon = Icons.Filled.List,
-            onIconClick = {}
-        )
-        NotesList(
-            notes = notes,
-            onNoteCheckedChange = { viewModel.onNoteCheckedChange(it) },
-            onNoteClick = { viewModel.onNoteClick(it)}
-        )
-    }
             title = {
                 Text(
                     text = "Notes",
@@ -92,6 +82,7 @@ fun NotesScreen(viewModel: MainViewModel) {
                 )
             }
         },
+    )
 }
 
 @Composable
