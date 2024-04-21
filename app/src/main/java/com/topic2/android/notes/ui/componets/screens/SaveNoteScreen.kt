@@ -128,6 +128,7 @@ fun ColorItem(
 @Preview @Composable
 fun ColorItemPreview() { ColorItem(ColorModel.DEFAULT) {} }
 fun SaveNoteScreen(viewModel: MainViewModel) {
+
 @Composable
 private fun SaveNoteTopAppBar(
     isEditingMode: Boolean,
