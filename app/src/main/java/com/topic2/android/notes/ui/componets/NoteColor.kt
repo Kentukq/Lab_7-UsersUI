@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun NoteColor(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     color: Color,
     size: Dp,
     border: Dp

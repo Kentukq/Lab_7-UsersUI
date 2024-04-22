@@ -14,11 +14,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * Модель просмотра, используемая для хранения глобального состояния приложения.
+ * View model used for storing the global app state.
  *
- * Эта модель просмотра используется для всех экранов.
+ * This view model is used for all screens.
  */
 class MainViewModel(private val repository: Repository) : ViewModel() {
+
     val notesNotInTrash: LiveData<List<NoteModel>> by lazy {
         repository.getAllNotesNotInTrash()
     }
@@ -49,9 +50,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun onNoteCheckedChange(note: NoteModel) {
-        viewModelScope.launch(
-            Dispatchers.Default
-        ) {
+        viewModelScope.launch(Dispatchers.Default) {
             repository.insertNote(note)
         }
     }
